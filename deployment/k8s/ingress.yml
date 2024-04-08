@@ -4,8 +4,8 @@ metadata:
   annotations:
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/target-type: ip
-  name: ingress1
-  namespace: namespace1
+  name: ingress-test
+  namespace: namespace-test
 spec:
   ingressClassName: alb
   rules:
@@ -20,16 +20,9 @@ spec:
         pathType: ImplementationSpecific
       - backend:
           service:
-            name: backend-business-service
+            name: backend-jobs-service
             port:
               number: 8091
-        path: /business
-        pathType: ImplementationSpecific
-      - backend:
-          service:
-            name: backend-cities-service
-            port:
-              number: 8092
-        path: /cities
+        path: /jobs
         pathType: ImplementationSpecific
 

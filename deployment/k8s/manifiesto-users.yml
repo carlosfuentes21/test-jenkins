@@ -1,13 +1,7 @@
----
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: namespace1
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  namespace: namespace1
+  namespace: namespace-test
   name: backend-users-deployment
 spec:
   selector:
@@ -21,7 +15,7 @@ spec:
     spec:
       containers:
         - name: backend-users-api
-          image: 486655662493.dkr.ecr.us-east-1.amazonaws.com/backend-test-repo:latest
+          image: 486655662493.dkr.ecr.us-east-1.amazonaws.com/backend-users:latest
           resources:
             requests:
               memory: "4Gi"
@@ -34,7 +28,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  namespace: namespace1
+  namespace: namespace-test
   name: backend-users-service
 spec:
   ports:
@@ -50,7 +44,7 @@ apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
   name: backend-users-autoscaler
-  namespace: namespace1
+  namespace: namespace-test
 spec:
   maxReplicas: 5
   minReplicas: 1
